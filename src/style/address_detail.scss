@@ -1,0 +1,536 @@
+.transactions_detail_wrap {
+    @include flex;
+    @include pcContainer;
+    font-size:0.16rem;
+    padding: .1rem;
+    .validator_information_value {
+        @include flex;
+        max-width: 12rem;
+        width: 100%;
+        font-size: 0.2rem;
+        padding: 0.2rem 0;
+    }
+    .validator_info {
+        max-width: 12rem;
+        width: 100%;
+        @include flex;
+        justify-content: space-between;
+        // flex-wrap: wrap;
+        .validator_info_left {
+            max-width: 6.83rem;
+            // flex:.6;
+            width: 100%;
+            // height: 4rem;
+            box-shadow:0px 1px 6px rgba(0,0,0,0.16);
+            padding: 0.2rem;
+            margin-right: .2rem;
+            .validator_info_left_top {
+                position: relative;
+                @include flex;
+                // height: 1.8rem;
+                border-bottom: 0.01rem solid #707070;
+                .validator_info_img {
+                    display: inline-block;
+                    min-width: 0.8rem;
+                    height: 0.8rem;
+                    margin-right: .25rem;
+                    border-radius: 0.4rem;
+                    overflow: hidden;
+                    background: black;
+                }
+                .validator_info_rank {
+                    width: .25rem;
+                    height: .25rem;
+                    text-align: center;
+                    line-height:.25rem;
+                    background: #3598db;
+                    position: absolute;
+                    left: .6rem;
+                    border-radius: .15rem;
+                    color: white;
+                }
+                ul {
+                    width: 100%;
+                    max-width: 5.2rem;
+                    .validator_info_name {
+                        max-width: 5.1rem;
+                        // width: 100%;
+                        flex: 1;
+                        @include flex;
+                        justify-content: space-between;
+                        .validator_info_name_active {
+                            width: 0.765rem;
+                            height: 0.26rem;
+                            color: white;
+                            border-radius: 0.13rem;
+                            text-align: center;
+                            line-height: 0.28rem;
+                        }
+                    }
+                    li {
+                        padding: 0.05rem 0;
+                        div {
+                            word-break: break-all;
+                            &:first-child {
+                                font-size: 0.2rem;
+                            }
+                        }
+                    }
+                    .validator_info_address {
+                        a{
+                            color: #003AD8 !important;
+    
+                        }
+                    }
+                }
+            }
+            .validator_info_left_bottom {
+                margin-top: 0.1rem;
+                li {
+                    @include flex;
+                    padding: 0.03rem 0;
+                    div {
+                        &:first-child {
+                            width: 1.15rem;
+                        }
+                        &:last-child {
+                            max-width: 5.4rem;
+                        }
+                    }
+                    .validator_info_left_bottom_block {
+                        a{
+                            color: #003AD8 !important;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+        .validator_info_right {
+            // flex: .4;
+            @include flex;
+            // max-width: 5rem;
+            flex-direction: column;
+            justify-content: space-between;
+            .validator_info_deleg,.validator_info_block {
+                // max-width: 5rem;
+                // height: 1.9rem;
+                box-shadow:0px 1px 6px rgba(0,0,0,0.16);
+                padding: 0.2rem;
+            }
+            .validator_info_deleg {
+                justify-content: space-between;
+                p {
+                    height: 0.3rem;
+                }
+                ul {
+                    max-width: 4.6rem;
+                    @include flex;
+                    #validator_info_deleg_echarts {
+                        width: 1.06rem;
+                        height: 1.06rem;
+                        margin-right: 0.42rem;
+                        margin-top: 0.1rem;
+                    }
+                    .validator_info_deleg_content {
+                        width: 3rem;
+                        .validator_info_deleg_msg {
+                            // width: 3rem;
+                            height: 0.84rem;
+                            margin-top: 0.1rem;
+                            @include flex;
+                            justify-content: space-between;
+                            div {
+                                padding: 0 0.05rem;
+                                border-left: 0.01rem solid #36AEFF;
+                                @include flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            .validator_info_block {
+                .validator_info_block_name {
+                    font-size: 0.2rem;
+                    position: relative;
+                    bottom: 0.1rem;
+                }
+                ul {
+                    width: 4.64rem;
+                    @include flex;
+                    flex-wrap: wrap;
+                    li {
+                        margin-right: 0.1rem;
+                        margin-bottom: 0.06rem;
+                        width: 0.08rem;
+                        height: 0.28rem;
+                    }
+                    .validator_info_block_content {
+                        background: #5E5E5E;
+                    }
+                    .validator_info_block_null {
+                        background-image: url('../assets/block-null.png');
+                        background-size: 0.08rem 0.28rem;
+                    }
+                    .validator_info_block_content,.validator_info_block_null {
+                        cursor:pointer;
+                        .tooltip_span {
+                            display: none;
+                        }
+                        &:hover {
+                            .tooltip_span {
+                                display: inline-block;
+                                width:0.7rem;
+                                height:0.2rem;
+                                position: relative;
+                                bottom: 0.3rem;
+                                right:0.2rem;
+                                background: black;
+                                color: white;
+                                text-align: center;
+                                line-height: 0.2rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .validator_table_container{
+        @include flex;
+        // margin-top: 0.2rem;
+        max-width: 12rem;
+        width: 100%;
+        min-height: 4.6rem;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;    
+        .validator_table_container_delegations,.validator_table_container_declarations {
+            box-shadow:0px 0.01rem 0.06rem rgba(0,0,0,0.16);
+            padding:0.2rem;
+            width: 5.9rem;
+            border-radius: 0.1rem;
+            margin-top: .2rem;
+            .validator_table_container_delegations_title {
+                @include flex;
+                justify-content: space-between;
+                .validator_table_container_delegations_title_right {
+                    display: inline-block;
+                    // width: 1.43rem;
+                    height: 0.26rem;
+                    font-size: 0.14rem;
+                    border: 0.01rem solid #707070;
+                    border-radius: 0.13rem;
+                    padding: 0 0.05rem;
+                    line-height: 0.24rem;
+                    img {
+                        width: 0.11rem;
+                        height: 0.14rem;
+                        position: relative;
+                        bottom: 0.02rem;
+                    }
+                }
+            }
+        }
+        .validator_detail_table {
+            min-height: 3.5rem;
+            width: 5.5rem;
+            overflow-x: auto;
+        }
+    }
+    .validator_table_container_proposed {
+        margin-top: 0.2rem;
+        box-shadow:0px 1px 6px rgba(0,0,0,0.16);
+        padding: 0.2rem;
+        border-radius: 0.1rem;
+        margin-bottom: 0.2rem;
+        width: 100%;
+        max-width: 12rem;
+        .validator_table_container_proposed_title {
+            max-width: 11.6rem;
+            @include flex;
+            justify-content: space-between;
+            .validator_table_container_proposed_title_right {
+                display: inline-block;
+                background: #1C7CBC;
+                border-radius: 0.05rem;
+                height: 0.26rem;
+                font-size: 0.14rem;
+                color: white;
+                line-height: 0.26rem;
+                padding: 0 0.05rem;
+                img {
+                    width:.16rem; 
+                }
+            }
+        }
+        .validator_table_container_pagination {
+            margin-top: 0.2rem;
+        }
+        .validator_detail_table {
+            // min-width: 5.5rem;
+            width: 100%;
+            overflow-x: auto;
+        }
+    }
+    .validator_table_container_pagination {
+        @include flex;
+        justify-content: space-between;;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+
+    //account style
+    .validator_account {
+        max-width: 12rem;;
+        width: 100%;
+        overflow-x: auto;
+        padding: .01rem;
+        .validator_account_header {
+            max-width: 12rem;
+            width: 100%;
+            min-width: 8rem;
+            height: 1rem;
+            color: white;
+            padding: 0.2rem;
+            @include flex;
+            justify-content: space-between;
+            background: #707070;
+            border-radius: 0.1rem 0.1rem 0 0;
+            .validator_account_header_left {
+                @include flex;
+                .validator_account_header_left_qrcode {
+                    margin-right: 0.2rem;
+                }
+                #qrCode {
+                    width: .6rem;
+                    height: .6rem;
+                }
+                .validator_account_header_left_address {
+                    @include flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+            }
+            .validator_account_header_right {
+                @include flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                right: 0.5rem;
+            }
+            h5 {
+                font-size: .22rem;
+            }
+        }
+        .validator_account_title {
+            @include flex;
+            justify-content: space-between;
+            height: 1.91rem;
+            box-shadow:0px 1px 6px rgba(0,0,0,0.16);
+            padding: 0.17rem 0.2rem;
+            max-width: 12rem;
+            width: 100%;
+            min-width: 8rem;
+            .vadivdator_account_content {
+                @include flex;
+                max-width: 7rem;
+                width: 100%;
+                #validator_account_content_echarts {
+                    width: 1.55rem; 
+                    height: 1.55rem;
+                    margin-right: 0.2rem;
+                }
+                .validator_account_content_left {
+                    flex: 1;
+                    height: 1.55rem;
+                    padding-right: .2rem;
+                    border-right: 0.01rem solid #36AEFF;
+                    @include flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    min-width: 3.75rem;
+                    li {
+                        @include flex;
+                        justify-content: space-between;
+                        .validator_account_content_left_name {
+                            width: 1.6rem;
+                            span {
+                                &:first-child {
+                                    display: inline-block;
+                                    width: 0.52rem;
+                                    height: 0.12rem;
+                                    margin-right: 0.1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .validator_account_title_atom {
+                max-width: 4.6rem;
+                width: 100%;
+                padding-left: 0.47rem;
+                @include flex;
+                flex-direction: column;
+                justify-content: space-between;
+                div {
+                    p {
+                        &:first-child {
+                            font-size: .16rem;
+                        }
+                        &:last-child {
+                            font-size: .28rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+@media screen and (max-width: 1220px) {
+    .transactions_detail_wrap {
+        .validator_table_container {
+            .validator_table_container_delegations,.validator_table_container_declarations {
+                width: 100%;
+                .validator_detail_table {
+                    width: 100%;
+                }
+            }
+        }
+        .validator_account {
+
+            .validator_account_title {
+                .vadivdator_account_content {
+                    font-size: .13rem;
+                }
+                .validator_account_title_atom {
+                    div {
+                        p {
+                            &:last-child {
+                                font-size: .2rem;
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1100px) {
+    .transactions_detail_wrap {
+        .validator_info {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .validator_info_left {
+                max-width: 10rem;
+                margin-bottom: .1rem;
+                margin-right: 0;
+            }
+            .validator_info_right {
+                max-width: 10rem;
+                width: 100%;
+                .validator_info_deleg {
+                    margin-bottom: .1rem;
+                    ul {
+                        .validator_info_deleg_content {
+
+                        }
+                    }
+                }
+            }
+        }
+        .validator_account {
+            .validator_account_header {
+                font-size: .13rem;
+                .validator_account_header_left {
+                }
+            }
+            .validator_account_title {
+                .vadivdator_account_content {
+                    font-size: .12rem;
+                }
+                .validator_account_title_atom {
+                    div {
+                        p {
+                            &:first-child {
+                                font-size: .12rem;
+                            }
+                            &:last-child {
+                                font-size: .16rem;
+                            }
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 580px) {
+    .transactions_detail_wrap {
+        .validator_info {
+            .validator_info_left {
+                .validator_info_left_top{
+                    ul {
+                        li {
+                            div{
+                                font-size: .12rem;
+                                &:first-child {
+                                    font-size: .16rem;
+                                }
+                            }
+                        }
+                    }
+                }
+                .validator_info_left_bottom{
+                    font-size: .12rem;
+                }
+            }
+            .validator_info_right {
+                .validator_info_deleg {
+                    ul {
+                        #validator_info_deleg_echarts {
+                            margin-right: .3rem;
+                        }
+                        .validator_info_deleg_content {
+                            font-size: .12rem;
+                        }
+                    }
+                }
+                .validator_info_block {
+                    ul {
+                        width: 2.8rem;
+                        li {
+                            width: .05rem;
+                            margin-right: .06rem;
+                        }
+                    }
+                }
+            }
+        }
+        .validator_table_container {
+            .validator_table_container_pagination {
+                font-size: .1rem;
+            }
+        }
+        .validator_table_container_proposed {
+            .validator_table_container_pagination {
+                font-size: .1rem;
+            }
+        }
+    }
+}
+@media screen and (max-width: 390px) {
+    .transactions_detail_wrap {
+        .validator_information_value {
+            font-size: 0.16rem;
+        }
+    }
+}
+
+
