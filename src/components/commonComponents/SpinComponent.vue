@@ -5,11 +5,11 @@
 -->
 <template>
   <div class="spin-component" v-show="showLoading" >
-    <div class="spin-content" v-if="!network">
+    <div class="spin-content" v-show="!network">
       <img style="with:48px;height: 48px;" src="../../assets/loading.gif">
       <p>Loading,please wait...</p>
     </div>
-    <div class="spin-content" v-else> 
+    <div class="spin-content" v-show="network"> 
       <img style="with:52px;height: 52px;" src="../../assets/network.png">
       <p style="font-size: .12rem;">Network error. Reload and try again</p>
     </div>

@@ -197,6 +197,31 @@
                         {{row.Amount}}
                     </div>
             </template>
+            <template slot-scope= "{ row }" slot="type">
+				<div class="common_hover_address_parent type" style="display: inline-block;height: 0.2rem;
+					background: #0294D7;
+					line-height: 0.2rem;
+					color:white;
+					padding: 0 0.1rem;
+					border-radius: 0.1rem;">  
+                    {{row.type}} 
+                </div> <span v-if="row.num > 1"> + {{row.num-1}}</span>
+			</template>
+            <template slot-scope= "{ row }" slot="amount">
+				<div v-if="row.num > 1" class="common_hover_address_parent">
+                    <router-link :to="`/tx?txHash=${row.Tx_Hash}`" class="link_style">more</router-link>
+                </div>
+				<div v-else class="common_hover_address_parent">
+					{{row.amount + ' HSN'}}
+                </div>
+			</template>
+            <template slot-scope= "{ row }" slot="result">
+				<div class="common_hover_address_parent">
+                    <img v-if="row.result === 'Success'" src="../../assets/result-success.png" alt="">
+					<img v-else src="../../assets/result-fail.png" alt="">
+					{{row.result}}
+                </div>
+			</template>
         </m-table>
     </div>
 </template>
@@ -563,15 +588,15 @@ export default {
                 },
                 {
                     title: 'Type',
-                    key:'type'
+                    slot:'type'
                 },
                 {
                     title: 'Result',
-                    key:'result'
+                    slot:'result'
                 },
                 {
                     title: 'Amount',
-                    key:'amount'
+                    slot:'amount'
                 },
                 {
                     title: 'Fee',

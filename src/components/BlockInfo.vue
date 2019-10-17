@@ -195,9 +195,10 @@
                                         Block: item.height,
                                         Amount: item.amount,
                                         Tx_Type: item.types,
-                                        Tx_Fee: item.fee,
+                                        Tx_Fee: item.fee + ' HSN',
                                         Tx_Status: item.result?'Success':"Fail",
                                         Timestamp: Tools.formatDateYearAndMinutesAndSeconds(item.time)+','+Tools.tranTime(item.time),
+                                        num: item.nums,
                                         listName: 'transfer',
                                     })
                                 }

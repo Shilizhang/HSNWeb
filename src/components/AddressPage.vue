@@ -11,7 +11,10 @@
                     <canvas class="validator_account_header_left_qrcode" style="width: 0.6rem; height: 0.6rem; background-color: black; display: inline-block" id= "qrCode"></canvas>
                     <div class="validator_account_header_left_address">
                         <h5>Address</h5>
-                        <div v-show="copySuccess" style="background: black; position: absolute; padding:0 .2rem; border-radius: .1rem;">复制成功</div>
+                        <div class="blockBox" :class="copySuccess?'showBox':''">
+                            <div @click="closeBox">X</div>
+                            <div>Copied</div>
+                        </div>
                         <span class="validator_account_header_content" :data-clipboard-text="address" @click="copy($event)">{{address}}</span>
                     </div>
                 </div>
@@ -521,9 +524,10 @@ export default {
                                     Block: item.height,
                                     Tx_Hash: item.hash,
                                     type: item.types,
-                                    result: item.result,
+                                    result: item.result?"Success":"Fail",
                                     amount: item.amount,
                                     fee: item.fee,
+                                    num:item.nums,
                                     Timestamp:Tools.formatDateYearAndMinutesAndSeconds(item.time)+','+Tools.tranTime(item.time),
                                 })
                             }
@@ -558,7 +562,10 @@ export default {
             }else if(diffY > 0 && diffM > 0) {
                 return diffY + 'years'
             }
-        }
+        },
+        closeBox() {
+            this.copySuccess = false
+        },
     }
 }
 </script>

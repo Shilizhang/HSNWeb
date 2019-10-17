@@ -92,7 +92,6 @@ export default {
         {
           title: 'Validator',
           slot: 'moniker',
-          sortable: true,
         },
 
         {
@@ -102,10 +101,9 @@ export default {
           sortMethod: this.sortMethodPower('votingPower'),
           className: 'text_right'
         },
-        { // +++++++++++++++++
+        {
           title: 'Cumulative Share%',
           key: 'CumulativeShare',
-          sortable: true,
           sortMethod: this.sortMethodPer('CumulativeShare'),
           className: 'text_right'
 

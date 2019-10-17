@@ -61,10 +61,12 @@
                      @click="showFeature">
                     <img src="../assets/menu.png">
                 </div>
-                <div style="width: 57%; height: 0.31rem; border: 0.01rem solid #707070; line-height: 0.31rem; text-align: center; color:#666; border-radius: 0.04rem; font-size: 0.12rem;"
-                    @click="()=> this.showdownCode = true">
+                <!-- <div style="width: 57%; height: 0.31rem; border: 0.01rem solid #707070; line-height: 0.31rem; text-align: center; color:#666; border-radius: 0.04rem; font-size: 0.12rem;"
+                    @click="()=> this.showdownCode = true"> -->
+                    <div style="width: 57%; height: 0.31rem; border: 0.01rem solid #707070; line-height: 0.31rem; text-align: center; color:#666; border-radius: 0.04rem; font-size: 0.12rem;"
+                        @click="download">
                     App Wallet Download &nbsp; 
-                    <img style="width: .2rem; height: .2rem; position: relative; bottom: .02rem;" src="../assets/head_dowload.png" alt="">
+                    <!-- <img style="width: .2rem; height: .2rem; position: relative; bottom: .02rem;" src="../assets/head_dowload.png" alt=""> -->
                 </div>
                 <div class="image_wrap_mobile"
                      @click="toHome" >
@@ -229,6 +231,9 @@
 			window.removeEventListener('resize', this.onWindowResize);
 		},
 		methods: {
+            download() {
+                window.location.href = 'https://invite.pmn.hsn.link/?ref=3531846&nsukey=7ozvnOQjcs%2F6QYgtczy%2BGvpkY46cwLrkEw8jcuQUuA%2Bi8pHMFq3iMFcPGj7IPOYfq3%2FV2ncSIU4l%2FYYSFWnMWuISGc%2FRKEzSmqTRrSgQOMOOCgiVu9HHtjLY0fKsh1KTgDtjSfowDT%2B8nYwLsSY3NlK%2B9Vhb3IXnhYeb%2F37%2BdAn0P9BtM0GkkdrVHQYuNueu82shJ%2BAax4lvw4Adjpiuaw%3D%3D'
+            },
             toHome() {
                 // window.location.href = 'https://www.hsn.link/'
                 this.$router.push({path:'/home'})
@@ -894,11 +899,11 @@
                         .header_menu_content {
                             .header_menu_list_content {
                                 margin-left: 0.08rem;
-                                // li {
-                                //     padding: 0 0.08rem;
-                                // }
+                                li {
+                                    padding: 0 0.05rem;
+                                }
                                 .nav_item_active {
-                                    padding: 0 0.08rem;
+                                    padding: 0 0.05rem;
                                 }
                                 .transaction_list_content {
                                     padding: 0;

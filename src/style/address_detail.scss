@@ -313,6 +313,41 @@
                     @include flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    .validator_account_header_content {
+                        cursor: pointer;
+                    }
+                    .blockBox {
+                        position: fixed;
+                        top:50%;
+                        left:50%;
+                        margin-left: -1.7rem;
+                        margin-top: -1.8rem;
+                        width: 3.3rem;
+                        height: 1.6rem;
+                        padding:0.1rem;
+                        background: white;
+                        border: 0.01rem solid rgba(51,51,51,1);
+                        border-radius: 0.1rem;
+                        z-index: 10;
+                        display: none;
+                        color: black;
+                        div {
+                            &:first-child {
+                                width:0.2rem;
+                                height:0.2rem;
+                                margin-left: 2.9rem;
+                                cursor:pointer;
+                                text-align: center;
+                            }
+                            &:last-child {
+                                line-height: 1rem;
+                                text-align: center;
+                            }
+                        }
+                    }
+                    .showBox {
+                        display: block;
+                    }
                 }
             }
             .validator_account_header_right {

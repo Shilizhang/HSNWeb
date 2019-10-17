@@ -145,6 +145,12 @@
       window.addEventListener("scroll",this.handleScroll,true);
     },
     mounted() {
+      var _hmt = _hmt || [];
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7df73441ef3c8da2cd1f9ecacdf2cab7";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    
       this.headerHeightStyle = `${document.getElementById('header').clientHeight}px`;
     },
     updated() {

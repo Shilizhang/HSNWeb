@@ -214,6 +214,17 @@ export default {
         arr[i] = arr[minIndex];
         arr[minIndex] = temp;
       }
+      //排序后 对Cumulative Share 重新计算
+      this.data.forEach((item,index,arr)=>{
+        if(index) {
+          item.CumulativeShare = '0%'
+          let num = Number(item.votingPower.split('r')[1].split('%')[0])
+          let num1 = Number(arr[index-1].CumulativeShare.split('%')[0])
+          item.CumulativeShare = (num + num1).toFixed(2) + '%'
+        }else {
+          item.CumulativeShare = item.votingPower.split('r')[1]
+        }
+      })
       return arr;
     }
   },

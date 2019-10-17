@@ -88,7 +88,7 @@
 							this.txList = [];
 							this.showNoData = true;
 						}
-						this.flShowLoading = false;
+						// this.flShowLoading = false;
 					}catch (e) {
 						console.error(e)
 					}
@@ -116,7 +116,7 @@
                 .transaction_list_title{
                     font-size: 0.22rem;
                     font-weight: 500;
-                    padding-left: 0.2rem;
+                    // padding-left: 0.2rem;
                     color: #0294D7;
                 }
             }

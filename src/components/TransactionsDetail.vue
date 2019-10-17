@@ -11,8 +11,8 @@
                 <div style="margin-bottom: 0.2rem;">
                     <p class="transaction_information_content_title" >Information</p>
                 </div>
-                <div style="width: 3.5rem; padding: 0 0.2rem; background: #FF5E5E; border-radius:  0.2rem; color: white; display: none;">
-                    Warning! insufficient account funds; &lt; 2000uatom
+                <div style="margin-bottom: .1rem; display: inline-block; padding: 0 0.2rem; background: #FF5E5E; border-radius:  0.2rem; color: white; " v-if="status === 'Fail'">
+                    {{message}}
                 </div>
                 <div class="information_props_wrap">
                     <span class="information_props">TxHash :</span>
@@ -21,13 +21,20 @@
                  <div class="information_props_wrap">
                     <span class="information_props">Status :</span>
                     <span class="information_value information_value_fixed">
-                        <span :class="{'fail_status': status === 'Fail' }">{{status}}</span>
-                        <div class="info_icon_div question_icon_div" v-if="status === 'Fail' && failInfo" v-table-tooltip="{show: true, container: $refs.valueInformation}">
+                        <span class="success_status" v-show="status === 'Success'">
+                            <img src="../assets/result-success.png" alt="">
+                            {{status}}
+                        </span>
+                        <span class='fail_status' v-show="status === 'Fail'">
+                            <img src="../assets/result-fail.png" alt="">
+                            {{status}}
+                        </span>
+                        <!-- <div class="info_icon_div question_icon_div" v-if="status === 'Fail' && failInfo" v-table-tooltip="{show: true, container: $refs.valueInformation}">
                             <div class="tooltip_span">
                                 <div>{{failInfo}}</div>
                                 <i></i>
                             </div>
-                        </div>
+                        </div> -->
                     </span>
                 </div>
                 <div class="information_props_wrap">
@@ -55,7 +62,7 @@
                 <p style="font-size: .22rem; color: black" >Msgs</p>
                 <div style="border: 0.01rem solid #0294D7; padding: 0.2rem 0.2rem 0.1rem 0.2rem; border-radius: 0.1rem;">
                     <div style="max-width: 11.2rem; height: .5rem; border-bottom: 1px solid rgba(2,148,215,1); margin-bottom: 0.1rem;">
-                        <img v-show="item.name.includes('Get') || item.name.includes('EditAddress')" src="../assets/msgs.png" alt="">
+                        <img v-show="item.name.includes('Get') || item.name.includes('EditAddress') || item.name.includes('Unjaild')" src="../assets/msgs.png" alt="">
                         <img v-show="item.name.includes('Send')" src="../assets/send.png" alt="">
                         <img v-show="item.name.includes('Vote')" src="../assets/vote.png" alt="">
                         <img v-show="item.name.includes('Create')" src="../assets/vote.png" alt="">
@@ -66,7 +73,7 @@
                         <span class="information_props">Moniker</span>
                         <span class="information_value">{{item.value.description.moniker}}</span>
                     </div>
-                    <div class="information_msgs" v-if="item.value.description ">
+                    <div class="information_msgs" v-if="item.value.description && item.value.description.website && item.value.description.website !== '[do-not-modify]' ">
                         <span class="information_props">Website</span>
                         <span class="information_value" @click="openWindow(item.value.description.website)">
                             <a >{{item.value.description.website }} </a>
@@ -85,7 +92,7 @@
                             <router-link :to="`/validators/${item.value.validator_address || item.value.address}`">{{item.value.validator_address || item.value.address}}</router-link> 
                         </span>
                     </div>
-                    <div class="information_msgs" v-if="item.value.Description">
+                    <div class="information_msgs" v-if="item.value.Description && item.value.Description.website && item.value.Description.website !== '[do-not-modify]'">
                         <span class="information_props">Website</span>
                         <span class="information_value" @click="openWindow(item.value.Description.website)">
                             <a>{{item.value.Description.website }} </a>
@@ -228,7 +235,7 @@
                 multiSendFlag:'',
                 undelegateFlag:'',
                 voteFlag:'',
-
+                message:'',
                 showLoading:true,
 			}
 		},
@@ -258,23 +265,24 @@
                                 let data = item.data
                                 let msg = data.tx.value.msg
 								this.hashValue = data.txhash;
-                                this.status = data.logs[0].success ? 'Success' : 'Fail';
+                                this.status = data.logs ?data.logs[0].success ? 'Success' : 'Fail' :'Fail';
 								this.blockValue = data.height;
 								this.timestampValue = Tools.formatDateYearAndMinutesAndSeconds(data.timestamp)
                                 this.timeAgo = Tools.tranTime(data.timestamp);
                                 this.actualTxFee = data.tx.value.fee.amount.length?`${data.tx.value.fee.amount[0].amount} ${data.tx.value.fee.amount[0].denom.toUpperCase()}`: '0.00';
                                 this.gasUsedByTxn = data.gas_used;
                                 this.gasWanted = data.gas_wanted;
+                                this.message = data.logs?data.logs[0].log && JSON.parse(data.logs[0].log).message:data.raw_log && JSON.parse(data.raw_log).message
                                 msg.forEach(item => {
                                     let type = item.type;
                                     switch (type) {
                                         case 'cosmos-sdk/MsgWithdrawDelegationReward':
                                             item.name = 'GetReward';
-                                            data.events.forEach(list => {
+                                            !data.events?'': data.events.forEach(list => {
                                                 if(list.type === 'withdraw_rewards') {
                                                     list.attributes.forEach(val => {
                                                         if( val.key == 'amount') {
-                                                            item.rewardAmount = val.value || '--'
+                                                            item.rewardAmount = val.value.toUpperCase() || '--'
                                                         }
                                                     })
                                                 }
@@ -286,7 +294,7 @@
                                                 if(list.type === 'withdraw_commission') {
                                                     list.attributes.forEach(val => {
                                                         if(val.value.includes('hsn')) {
-                                                            item.commissionAmount = val.value
+                                                            item.commissionAmount = val.value.toUpperCase()
                                                         }
                                                     })
                                                 }
@@ -319,6 +327,9 @@
                                             break;
                                         case 'cosmos-sdk/MsgModifyWithdrawAddress':
                                             item.name = 'EditAddress';
+                                            break;
+                                        case 'cosmos-sdk/MsgUnjail':
+                                            item.name = 'Unjaild';
                                             break;
                                     }
                                 })
@@ -373,6 +384,8 @@
                     @include flex;
                     line-height: 0.2rem;
                     margin-bottom: 0.12rem;
+                        font-size: .14rem;
+
                     .information_props{
                         width:2.67rem;
                     }
@@ -386,6 +399,7 @@
                     line-height: 0.36rem;
                     @include flex;
                     justify-content: space-between;
+                    font-size: .14rem;
                     .information_props{
                         display: inline-block;
                         width:2rem;
@@ -433,6 +447,16 @@
         }
         .fail_status {
             color: #fa8593;
+            img {
+                position: relative;
+                bottom: .02rem;
+            }
+        }
+        .success_status {
+            img {
+                position: relative;
+                bottom: .02rem;
+            }
         }
         .question_icon_div {
             background-image: url(../assets/question_icon.png) !important;

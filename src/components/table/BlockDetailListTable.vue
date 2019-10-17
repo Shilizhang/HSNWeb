@@ -1,6 +1,6 @@
 <template>
   <div :class="showNoData?'show_no_data':''"
-       style="max-width: 11.6rem; margin: 0 .1rem; min-width: 5.8rem; "
+       style="max-width: 11.6rem; margin: 0 .1rem; min-width: 5.9rem; "
        class="validator_table">
     <b-table :borderless="true" :fields='listFields'
              :items='items'
@@ -46,6 +46,14 @@
           <img v-else src="../../assets/result-fail.png" alt="">
           {{data.item.Tx_Status}}
         </span>
+      </template>
+      <template slot-scope= "data" slot="Amount">
+          <div v-if="data.item.num > 1" class="common_hover_address_parent">
+            <router-link :to="`/tx?txHash=${data.item.Tx_Hash}`" class="link_style">more</router-link>
+            </div>
+				<div v-else class="common_hover_address_parent">
+					{{data.item.Amount + ' HSN'}}
+            </div>
       </template>
     </b-table>
   </div>

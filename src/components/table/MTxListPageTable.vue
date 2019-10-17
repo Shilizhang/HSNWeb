@@ -22,7 +22,7 @@
                     <router-link :to="`/tx?txHash=${row.Tx_Hash}`" class="link_style">more</router-link>
                 </div>
 				<div v-else class="common_hover_address_parent">
-					{{row.Amount}}
+					{{row.Amount + ' HSN'}}
                 </div>
 			</template>
 			<template slot-scope= "{ row }" slot="Tx_Type">

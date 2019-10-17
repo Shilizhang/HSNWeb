@@ -8,7 +8,7 @@
         <div class="validator_info">
             <div class="validator_info_left">
                 <div class = "validator_info_left_top">
-                    <div class="validator_info_rank">{{rank}}</div>
+                    <div class="validator_info_rank" v-show="!jailed">{{rank}}</div>
                     <div class="validator_info_img">
                     </div>
                     <ul>
@@ -437,7 +437,7 @@ export default {
                         list.delegations.forEach(item => {
                             this.txTableList.delegations.items.push({
                                 address: item.address,
-                                amount: item.amount + 'HSN',
+                                amount: item.amount + ' HSN',
                                 share: (item.share*100).toFixed(2) + '%'
                             })
                         })
@@ -455,7 +455,7 @@ export default {
                             this.txTableList.events.items.push({
                                 Tx_Hash: item.hash,
                                 block: item.height,
-                                Amount: item.amount,
+                                Amount: item.amount +" HSN",
                                 Timestamp: Tools.formatDateYearAndMinutesAndSeconds(item.time)+','+Tools.tranTime(item.time),
                                 sign: item.sign
                             })
@@ -474,7 +474,8 @@ export default {
                         this.showLoading =  false
                         this.txTableList.proposedBlocks.items = [];
                         data.data.forEach(item => {
-                            this.txTableList.proposedBlocks.items.push({
+                            
+                            item.height && this.txTableList.proposedBlocks.items.push({
                                 blockHash: item.block_hash,
                                 Block:item.height,
                                 txs: item.txs,

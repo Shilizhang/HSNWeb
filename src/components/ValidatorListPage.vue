@@ -97,7 +97,6 @@
 			getDataList(val) {
 				this.showLoading = true;
 				Service.commonInterface({vaildator:{type:val}},(item)=>{
-					this.showLoading = false;
 					this.items = [];
 					if(item.code === '0') {
 						let data = item.data;
